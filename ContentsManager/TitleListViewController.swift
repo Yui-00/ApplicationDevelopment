@@ -10,6 +10,8 @@ import RealmSwift
 
 class TitleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    //ここで
+    
     @IBOutlet weak var titleListTableView: UITableView!
     private let cellid = "cellid"
 
