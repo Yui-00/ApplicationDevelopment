@@ -13,6 +13,7 @@ class NewTitleViewController: UIViewController, UIImagePickerControllerDelegate,
     // Realmのインスタンスを取得
     let titleItem = try! Realm()
     
+    //前画面からジャンル名を受け取る
     var genre = ""
     var str = ""
     

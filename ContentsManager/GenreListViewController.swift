@@ -15,7 +15,6 @@ class GenreListViewController: UIViewController,UITextFieldDelegate,UITableViewD
     @IBOutlet weak var addButton: UIBarButtonItem!
     var contentList: Results<ContentItem>!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
