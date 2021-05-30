@@ -10,4 +10,5 @@ import RealmSwift
 
 class ContentItem: Object {
     @objc dynamic var content: String? = nil
+    @objc dynamic var sortNumber: Int = 0
 }

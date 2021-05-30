@@ -31,7 +31,7 @@ class GenreListViewController: UIViewController,UITextFieldDelegate,UITableViewD
         navigationItem.title = "ジャンル"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        let RightAddButton = UIBarButtonItem(title: "新規追加", style: .plain, target: self, action: #selector(tappedNavRightBarButton))
+        let RightAddButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tappedNavRightBarButton))
         navigationItem.rightBarButtonItem = RightAddButton
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
@@ -49,15 +49,31 @@ class GenreListViewController: UIViewController,UITextFieldDelegate,UITableViewD
 }
 
 extension GenreListViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.contentList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        let item: ContentItem = self.contentList[(indexPath as NSIndexPath).row]
-        cell.textLabel?.text = item.content
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! GenreListTableViewCell
+        
+        let temp = contentList[indexPath.row]
+        let genre :String = temp.content!
+        cell.genreName.text = genre
+        
+        //中に入ってるタイトル数を取得
+        let realmInstance = try! Realm()
+        let titleItemList = realmInstance.objects(TitleItem.self).filter("genre == %@", genre)
+        
+        let titleCount = titleItemList.count
+        
+        cell.titleCount.text = "(" + String(titleCount) + ")"
+        
         return cell
     }
 
@@ -128,6 +144,29 @@ extension GenreListViewController: UITableViewDataSource {
         self.contentTableView.reloadData()
     }
 }
+
+class GenreListTableViewCell: UITableViewCell{
+    
+    @IBOutlet weak var genreName: UILabel!
+    
+    @IBOutlet weak var genreImage: UIImageView!
+    
+    @IBOutlet weak var titleCount: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    @objc func tapCellButton(_ sender: UIButton) {
+        print("hello")
+    }
+    
+}
+
 
 
 

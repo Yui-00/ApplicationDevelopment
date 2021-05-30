@@ -9,8 +9,9 @@ import UIKit
 import RealmSwift
 
 class TitleItem: Object {
-    @objc dynamic var genre: String? = nil
-    @objc dynamic var title: String? = nil
-    @objc dynamic var addDay: String? = nil
-    @objc dynamic var review: String? = nil
+    @objc dynamic var genre: String? = ""
+    @objc dynamic var title: String? = ""
+    @objc dynamic var furi: String? = ""
+    @objc dynamic var addDay: Date = Date()
+    @objc dynamic var review = 4.5
 }
